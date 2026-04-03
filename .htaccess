@@ -1,0 +1,23 @@
+Options -Indexes
+ServerSignature Off
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Keep existing public path working
+    RewriteRule ^public/ - [L]
+
+    # Route root and all app paths to /public
+    RewriteRule ^$ public/index.php [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Never expose internals if requested directly
+RedirectMatch 403 ^/(app|database|docs|scripts|tests)(/|$)
+
+<FilesMatch "^(\\.env|\\.env\\..*|composer\\.(json|lock)|package(-lock)?\\.json|yarn\\.lock|\\.gitignore)$">
+    Require all denied
+</FilesMatch>
