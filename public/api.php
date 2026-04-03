@@ -102,9 +102,15 @@ try {
             Auth::requireRole(['owner', 'admin']);
             $body = request_data($method);
             must_have($body, ['id']);
-            $stmt = $pdo->prepare("DELETE FROM rooms WHERE id=:id");
-            $stmt->execute(['id' => (int) $body['id']]);
-            ApiResponse::json(['ok' => true, 'message' => 'Room deleted']);
+            try {
+                $stmt = $pdo->prepare("DELETE FROM rooms WHERE id=:id");
+                $stmt->execute(['id' => (int) $body['id']]);
+                ApiResponse::json(['ok' => true, 'message' => 'Room deleted']);
+            } catch (Throwable $e) {
+                $fallback = $pdo->prepare("UPDATE rooms SET status='blocked' WHERE id=:id");
+                $fallback->execute(['id' => (int) $body['id']]);
+                ApiResponse::json(['ok' => false, 'message' => 'Room has linked records; marked as blocked instead'], 409);
+            }
             break;
 
         case 'rooms.updateStatus':

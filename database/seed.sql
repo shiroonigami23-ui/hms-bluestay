@@ -1,11 +1,11 @@
 USE hotel_management;
 
 INSERT INTO users (full_name,email,phone,role,password_hash) VALUES
-('System Owner','owner@bluestay.local','9990000001','owner','$2y$10$qWXN9MnwUTWBxDCn34Lwsepm9J6rU4rj8ndjI3EeFZdRksTRo/fwm'),
-('Hotel Admin','admin@bluestay.local','9990000002','admin','$2y$10$qWXN9MnwUTWBxDCn34Lwsepm9J6rU4rj8ndjI3EeFZdRksTRo/fwm'),
-('Front Desk','reception@bluestay.local','9990000003','reception','$2y$10$qWXN9MnwUTWBxDCn34Lwsepm9J6rU4rj8ndjI3EeFZdRksTRo/fwm'),
-('Housekeeper One','housekeeping@bluestay.local','9990000004','housekeeping','$2y$10$qWXN9MnwUTWBxDCn34Lwsepm9J6rU4rj8ndjI3EeFZdRksTRo/fwm'),
-('Guest Demo','guest@bluestay.local','9990000005','customer','$2y$10$qWXN9MnwUTWBxDCn34Lwsepm9J6rU4rj8ndjI3EeFZdRksTRo/fwm');
+('System Owner','owner@bluestay.local','9990000001','owner','$2y$10$gJzG.3zAzugbDHyQzS3j3ONKpIpN/P4CyXTNXvLEqRQE8Mr0uroCS'),
+('Hotel Admin','admin@bluestay.local','9990000002','admin','$2y$10$gJzG.3zAzugbDHyQzS3j3ONKpIpN/P4CyXTNXvLEqRQE8Mr0uroCS'),
+('Front Desk','reception@bluestay.local','9990000003','reception','$2y$10$gJzG.3zAzugbDHyQzS3j3ONKpIpN/P4CyXTNXvLEqRQE8Mr0uroCS'),
+('Housekeeper One','housekeeping@bluestay.local','9990000004','housekeeping','$2y$10$gJzG.3zAzugbDHyQzS3j3ONKpIpN/P4CyXTNXvLEqRQE8Mr0uroCS'),
+('Guest Demo','guest@bluestay.local','9990000005','customer','$2y$10$gJzG.3zAzugbDHyQzS3j3ONKpIpN/P4CyXTNXvLEqRQE8Mr0uroCS');
 
 INSERT INTO rooms (room_number,floor_no,room_type,status,base_rate) VALUES
 ('101',1,'Standard','available',2500),
