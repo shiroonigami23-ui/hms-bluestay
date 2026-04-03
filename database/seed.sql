@@ -1,0 +1,36 @@
+USE hotel_management;
+
+INSERT INTO users (full_name,email,phone,role,password_hash) VALUES
+('System Owner','owner@bluestay.local','9990000001','owner','$2y$10$qWXN9MnwUTWBxDCn34Lwsepm9J6rU4rj8ndjI3EeFZdRksTRo/fwm'),
+('Hotel Admin','admin@bluestay.local','9990000002','admin','$2y$10$qWXN9MnwUTWBxDCn34Lwsepm9J6rU4rj8ndjI3EeFZdRksTRo/fwm'),
+('Front Desk','reception@bluestay.local','9990000003','reception','$2y$10$qWXN9MnwUTWBxDCn34Lwsepm9J6rU4rj8ndjI3EeFZdRksTRo/fwm'),
+('Housekeeper One','housekeeping@bluestay.local','9990000004','housekeeping','$2y$10$qWXN9MnwUTWBxDCn34Lwsepm9J6rU4rj8ndjI3EeFZdRksTRo/fwm'),
+('Guest Demo','guest@bluestay.local','9990000005','customer','$2y$10$qWXN9MnwUTWBxDCn34Lwsepm9J6rU4rj8ndjI3EeFZdRksTRo/fwm');
+
+INSERT INTO rooms (room_number,floor_no,room_type,status,base_rate) VALUES
+('101',1,'Standard','available',2500),
+('102',1,'Deluxe','occupied',3500),
+('201',2,'Suite','available',5500),
+('202',2,'Deluxe','dirty',3600),
+('301',3,'Family','maintenance',4800);
+
+INSERT INTO bookings (booking_code,guest_user_id,room_id,check_in,check_out,adults,children,source,status) VALUES
+('BK2604031001',5,2,'2026-04-03','2026-04-05',2,0,'Direct','checked_in'),
+('BK2604031002',5,3,'2026-04-06','2026-04-08',2,1,'OTA','confirmed');
+
+INSERT INTO housekeeping_tasks (room_id,assigned_to_user_id,task_type,priority,status) VALUES
+(4,4,'Deep Clean','high','pending'),
+(2,4,'Linen Refill','medium','in_progress');
+
+INSERT INTO service_requests (booking_id,room_id,guest_user_id,request_type,description,priority,status) VALUES
+(1,2,5,'room_service','Need extra towels and drinking water','medium','open'),
+(1,2,5,'laundry','Pickup laundry bag from room','low','in_progress');
+
+INSERT INTO invoices (invoice_no,booking_id,gstin,sub_total,tax_total,total_amount,payment_status) VALUES
+('INV-260403-001',1,'27ABCDE1234F1Z5',5000,900,5900,'partial'),
+('INV-260403-002',2,'27ABCDE1234F1Z5',11000,1980,12980,'unpaid');
+
+INSERT INTO payments (invoice_id,method,amount,transaction_ref,payment_status,paid_at) VALUES
+(1,'upi',3000,'UPIREF12345','success',NOW());
+
+-- Demo login password for all users above: Password@123

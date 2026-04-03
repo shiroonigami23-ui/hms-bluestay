@@ -1,0 +1,72 @@
+:root{
+  --bg:#f2f7ff;
+  --bg-soft:#e8f0ff;
+  --panel:#ffffff;
+  --text:#0a2447;
+  --muted:#5a6f8d;
+  --primary:#0a63ff;
+  --primary-dark:#0646b5;
+  --border:#d4e2ff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Tahoma,sans-serif;background:linear-gradient(180deg,var(--bg),#fff);color:var(--text)}
+a{color:var(--primary);text-decoration:none}
+.app-shell{min-height:100vh;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--text)}
+.brand img{width:34px;height:34px}
+.main-nav{display:flex;gap:16px;align-items:center}
+.menu-btn{display:none;background:#fff;border:1px solid var(--border);border-radius:10px;padding:6px 10px}
+.hero-wrap{padding:26px}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:stretch}
+.tag{display:inline-block;background:var(--bg-soft);border:1px solid var(--border);padding:6px 10px;border-radius:999px}
+.actions{display:flex;gap:12px;margin-top:16px}
+.btn{background:var(--primary);color:#fff;padding:10px 16px;border-radius:10px;border:none;cursor:pointer}
+.btn:hover{background:var(--primary-dark)}
+.btn-sm{padding:7px 12px}
+.btn-ghost{background:#fff;color:var(--primary);border:1px solid var(--border)}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(10,99,255,.08)}
+.panel ul{padding-left:18px}
+.container{max-width:1080px;margin:22px auto;padding:0 16px}
+.narrow{max-width:640px}
+.legal p{color:var(--muted)}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-grid{display:grid;gap:12px}
+.form-grid label{display:grid;gap:6px;font-weight:600}
+input,select,textarea{padding:10px;border:1px solid var(--border);border-radius:10px}
+.alert{padding:10px;background:#ffe4e4;border:1px solid #ffb2b2;border-radius:10px;color:#9a1616}
+.muted{color:var(--muted)}
+.helper{margin-top:12px;color:var(--muted)}
+.form-links{display:flex;justify-content:space-between;gap:12px;margin-top:12px}
+.site-footer{margin-top:auto;padding:18px 20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;background:#fff}
+.footer-links{display:flex;gap:10px}
+.dashboard-layout{display:grid;grid-template-columns:260px 1fr;gap:14px;padding:20px}
+.sidebar{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;position:sticky;top:74px;height:fit-content;display:grid;gap:10px}
+.nav-pill{padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:#f8fbff}
+.nav-pill:hover{background:var(--bg-soft)}
+.dashboard-content{display:grid;gap:14px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stats-grid div{padding:14px;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px}
+.tab-row{display:flex;gap:10px;flex-wrap:wrap}
+.tab-btn{padding:9px 12px;border-radius:10px;border:1px solid var(--border);background:#f8fbff;color:var(--text);cursor:pointer}
+.tab-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.info-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mini-card{padding:14px;border:1px solid var(--border);border-radius:12px;background:linear-gradient(160deg,#ffffff,#eef5ff)}
+tbody tr:hover{background:#f7faff}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:9px;border-bottom:1px solid #ecf1ff;text-align:left}
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .info-cards{grid-template-columns:1fr}
+  .dashboard-layout{grid-template-columns:1fr}
+  .sidebar{position:fixed;left:-280px;top:62px;bottom:0;width:260px;z-index:30;transition:left .25s}
+  .sidebar.open{left:10px}
+  .menu-btn{display:block}
+  .main-nav{display:none}
+  .form-links{flex-direction:column;align-items:flex-start}
+}
