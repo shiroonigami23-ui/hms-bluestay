@@ -1,0 +1,3 @@
+pool: File:Swimming Pool in a hotel in Tamil Nadu 03.jpg | https://upload.wikimedia.org/wikipedia/commons/2/2d/Swimming_Pool_in_a_hotel_in_Tamil_Nadu_03.jpg
+lounge: File:Interior view of the Wangz hotel lounge with shining parquet curved ceiling and round table Singapore.jpg | https://upload.wikimedia.org/wikipedia/commons/5/54/Interior_view_of_the_Wangz_hotel_lounge_with_shining_parquet_curved_ceiling_and_round_table_Singapore.jpg
+cuisine: File:Depot Hotel Restaurant, Sonoma, California - Sarah Stierch 01.jpg | https://upload.wikimedia.org/wikipedia/commons/d/dc/Depot_Hotel_Restaurant%2C_Sonoma%2C_California_-_Sarah_Stierch_01.jpg

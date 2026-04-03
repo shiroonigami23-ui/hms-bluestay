@@ -24,6 +24,7 @@ $isAuth = Auth::check();
     <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
     <nav class="main-nav">
       <a href="about.php">About</a>
+      <a href="facilities.php">Facilities</a>
       <a href="help.php">Help</a>
       <a href="contact.php">Contact</a>
       <?php if ($isAuth): ?>

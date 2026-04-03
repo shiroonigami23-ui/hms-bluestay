@@ -1,64 +1,3 @@
-function createDialog() {
-  const backdrop = document.getElementById("appDialogBackdrop");
-  const title = document.getElementById("appDialogTitle");
-  const message = document.getElementById("appDialogMessage");
-  const input = document.getElementById("appDialogInput");
-  const cancelBtn = document.getElementById("appDialogCancel");
-  const okBtn = document.getElementById("appDialogOk");
-
-  let resolver = null;
-
-  function close(result) {
-    if (backdrop) backdrop.hidden = true;
-    if (resolver) resolver(result);
-    resolver = null;
-  }
-
-  okBtn?.addEventListener("click", () => {
-    close(input && !input.hidden ? input.value : true);
-  });
-
-  cancelBtn?.addEventListener("click", () => close(false));
-  backdrop?.addEventListener("click", (e) => {
-    if (e.target === backdrop) close(false);
-  });
-
-  function show(options) {
-    if (!backdrop || !title || !message || !cancelBtn || !okBtn || !input) {
-      return Promise.resolve(false);
-    }
-    title.textContent = options.title || "Notice";
-    message.textContent = options.message || "";
-    okBtn.textContent = options.okText || "OK";
-    cancelBtn.textContent = options.cancelText || "Cancel";
-    cancelBtn.hidden = !!options.hideCancel;
-    if (options.type === "prompt") {
-      input.hidden = false;
-      input.value = options.defaultValue || "";
-      input.placeholder = options.placeholder || "";
-    } else {
-      input.hidden = true;
-      input.value = "";
-    }
-    backdrop.hidden = false;
-    return new Promise((resolve) => {
-      resolver = resolve;
-    });
-  }
-
-  return {
-    alert(msg, titleText = "Notice") {
-      return show({ title: titleText, message: msg, hideCancel: true });
-    },
-    confirm(msg, titleText = "Confirm") {
-      return show({ title: titleText, message: msg });
-    },
-    prompt(msg, defaultValue = "") {
-      return show({ title: "Input Required", message: msg, type: "prompt", defaultValue });
-    },
-  };
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
   const sidebar = document.getElementById("sidebar");
@@ -80,7 +19,4 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-
-  const dialog = createDialog();
-  window.safeDialog = dialog;
 });
