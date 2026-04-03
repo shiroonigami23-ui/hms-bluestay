@@ -1,0 +1,31 @@
+{
+  "name": "bluestay-hms-desktop",
+  "version": "1.1.0",
+  "description": "BlueStay HMS Desktop App",
+  "main": "main.js",
+  "author": "BlueStay HMS",
+  "private": true,
+  "scripts": {
+    "build:win": "electron-builder --win portable --publish never"
+  },
+  "devDependencies": {
+    "electron": "^37.2.1",
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "com.bluestay.hms.desktop",
+    "productName": "BlueStay HMS",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ]
+    }
+  }
+}
