@@ -7,6 +7,7 @@ $isAuth = Auth::check();
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="<?= e(csrf_token()) ?>">
   <title><?= e($title) ?></title>
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
   <link rel="icon" type="image/png" sizes="192x192" href="assets/img/app-icon-192.png">

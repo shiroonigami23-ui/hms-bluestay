@@ -4,6 +4,7 @@ require dirname(__DIR__) . '/app/includes/bootstrap.php';
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validate_csrf_from_request();
     $email = trim($_POST['email'] ?? '');
     $password = (string) ($_POST['password'] ?? '');
     if (Auth::login($pdo, $email, $password)) {
@@ -21,6 +22,7 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
     <h1>Login</h1>
     <?php if ($error): ?><p class="alert"><?= e($error) ?></p><?php endif; ?>
     <form method="post" class="form-grid">
+      <?= csrf_input() ?>
       <label>Email<input type="email" name="email" required></label>
       <label>Password<input type="password" name="password" required></label>
       <button class="btn" type="submit">Sign In</button>

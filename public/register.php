@@ -4,6 +4,7 @@ require dirname(__DIR__) . '/app/includes/bootstrap.php';
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validate_csrf_from_request();
     $data = [
         'full_name' => trim($_POST['full_name'] ?? ''),
         'email' => trim($_POST['email'] ?? ''),
@@ -36,6 +37,7 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
     <h1>Create Account</h1>
     <?php if ($error): ?><p class="alert"><?= e($error) ?></p><?php endif; ?>
     <form method="post" class="form-grid">
+      <?= csrf_input() ?>
       <label>Full Name<input type="text" name="full_name" required></label>
       <label>Email<input type="email" name="email" required></label>
       <label>Phone<input type="text" name="phone" required></label>

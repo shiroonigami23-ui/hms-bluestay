@@ -8,6 +8,7 @@ $ok = false;
 $token = trim($_GET['token'] ?? $_POST['token'] ?? '');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validate_csrf_from_request();
     $password = (string) ($_POST['password'] ?? '');
     $confirm = (string) ($_POST['confirm_password'] ?? '');
 
@@ -31,6 +32,7 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
     <?php if ($message): ?><p class="alert"><?= e($message) ?></p><?php endif; ?>
     <?php if (!$ok): ?>
       <form method="post" class="form-grid">
+        <?= csrf_input() ?>
         <input type="hidden" name="token" value="<?= e($token) ?>">
         <label>New Password<input type="password" name="password" required></label>
         <label>Confirm Password<input type="password" name="confirm_password" required></label>

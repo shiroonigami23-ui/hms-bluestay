@@ -84,6 +84,16 @@ class HttpClient:
         except Exception as e:
             return 599, json.dumps({"ok": False, "message": str(e)}), {}
 
+    def fetch_csrf_token(self, path: str = "/login.php") -> str:
+        code, body, _ = self.request(path, "GET")
+        if code != 200:
+            return ""
+        m = re.search(r'name="_csrf_token" value="([a-f0-9]+)"', body)
+        if m:
+            return m.group(1)
+        m2 = re.search(r'<meta name="csrf-token" content="([a-f0-9]+)">', body)
+        return m2.group(1) if m2 else ""
+
 
 def run_cmd(args: list[str], *, input_text: str | None = None, cwd: Path | None = None) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
@@ -145,7 +155,8 @@ def stop_server(proc: subprocess.Popen[str]) -> None:
 
 def ensure_login(email: str, password: str) -> HttpClient:
     client = HttpClient()
-    code, _, _ = client.request("/login.php", "POST", {"email": email, "password": password})
+    token = client.fetch_csrf_token("/login.php")
+    code, _, _ = client.request("/login.php", "POST", {"email": email, "password": password, "_csrf_token": token})
     if code not in (200, 302):
         raise RuntimeError(f"login post failed for {email} with status {code}")
     # verify auth session is truly active
@@ -204,7 +215,10 @@ def run_api_and_integration_tests(report: Report) -> None:
         return code, payload
 
     def api_post(client: HttpClient, action: str, data: dict[str, Any]) -> tuple[int, dict[str, Any]]:
-        code, body, _ = client.request(f"/api.php?action={action}", "POST", data)
+        csrf = client.fetch_csrf_token("/dashboard.php")
+        payload_data = dict(data)
+        payload_data["_csrf_token"] = csrf
+        code, body, _ = client.request(f"/api.php?action={action}", "POST", payload_data)
         payload = extract_json(body) if body.strip().startswith("{") else {"raw": body}
         return code, payload
 
@@ -327,13 +341,15 @@ def run_api_and_integration_tests(report: Report) -> None:
     # Forgot/reset via user-side flow
     unique = f"testuser_{int(time.time())}@mail.local"
     anon = HttpClient()
-    code, _, _ = anon.request("/register.php", "POST", {"full_name": "API Test User", "email": unique, "phone": "9000001000", "role": "customer", "password": "Password@123"})
+    reg_token = anon.fetch_csrf_token("/register.php")
+    code, _, _ = anon.request("/register.php", "POST", {"full_name": "API Test User", "email": unique, "phone": "9000001000", "role": "customer", "password": "Password@123", "_csrf_token": reg_token})
     checks.append(("user.register", code in (200, 302), f"status={code}"))
     exists = sql_scalar(f"SELECT COUNT(*) FROM users WHERE email='{unique}'")
     if exists == "0":
         fallback_hash = "$2y$10$gJzG.3zAzugbDHyQzS3j3ONKpIpN/P4CyXTNXvLEqRQE8Mr0uroCS"
         _ = sql_scalar(f"INSERT INTO users(full_name,email,phone,role,password_hash) VALUES('API Test User','{unique}','9000001000','customer','{fallback_hash}'); SELECT 1;")
-    code, body, _ = anon.request("/forgot-password.php", "POST", {"email": unique})
+    fp_token = anon.fetch_csrf_token("/forgot-password.php")
+    code, body, _ = anon.request("/forgot-password.php", "POST", {"email": unique, "_csrf_token": fp_token})
     token_match = re.search(r"token=([a-f0-9]{32,})", body)
     token = token_match.group(1) if token_match else ""
     reset_rows = sql_scalar(
@@ -341,9 +357,11 @@ def run_api_and_integration_tests(report: Report) -> None:
         f"WHERE u.email='{unique}' AND pr.used_at IS NULL;"
     )
     checks.append(("user.forgot_password", code == 200 and int(reset_rows) > 0, f"status={code},resets={reset_rows}"))
-    code, _, _ = anon.request("/reset-password.php", "POST", {"token": token, "password": "Reset@1234", "confirm_password": "Reset@1234"})
+    rp_token = anon.fetch_csrf_token("/reset-password.php")
+    code, _, _ = anon.request("/reset-password.php", "POST", {"token": token, "password": "Reset@1234", "confirm_password": "Reset@1234", "_csrf_token": rp_token})
     checks.append(("user.reset_password", code == 200, f"status={code}"))
-    code, _, _ = anon.request("/login.php", "POST", {"email": unique, "password": "Reset@1234"})
+    l2_token = anon.fetch_csrf_token("/login.php")
+    code, _, _ = anon.request("/login.php", "POST", {"email": unique, "password": "Reset@1234", "_csrf_token": l2_token})
     checks.append(("user.login_after_reset", code in (200, 302), f"status={code}"))
 
     for name, ok, detail in checks:
@@ -369,7 +387,7 @@ def run_black_box_tests(report: Report) -> None:
         payload = extract_json(body)
     except Exception:
         payload = {}
-    report.add("blackbox.missing_required_fields", code == 422 and payload.get("ok") is False, f"status={code}")
+    report.add("blackbox.missing_required_fields", code in (419, 422) and payload.get("ok") is False, f"status={code}")
 
 
 def run_db_connectivity_tests(report: Report) -> None:

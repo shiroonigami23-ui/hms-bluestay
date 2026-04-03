@@ -13,7 +13,7 @@ if len(sys.argv) >= 4:
     USER = sys.argv[2]
     PASS = sys.argv[3]
 
-SKIP_PARTS = {".git", "node_modules", "vendor", "__pycache__"}
+SKIP_PARTS = {".git", "node_modules", "vendor", "__pycache__", "mobile-app", "tests", "keystore", ".idea"}
 
 
 def ensure_dir(ftp: FTP, rel_path: str) -> None:
@@ -43,6 +43,8 @@ def main() -> None:
     for path in ROOT.rglob("*"):
         rel = path.relative_to(ROOT).as_posix()
         if any(part in SKIP_PARTS for part in path.parts):
+            continue
+        if path.name.endswith((".jks", ".keystore", ".bak", ".pyc")):
             continue
         if path.is_dir():
             ensure_dir(ftp, rel)

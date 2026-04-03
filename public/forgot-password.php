@@ -7,6 +7,7 @@ $message = '';
 $resetLink = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validate_csrf_from_request();
     $email = trim($_POST['email'] ?? '');
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $token = Auth::createPasswordResetToken($pdo, $email);
@@ -27,6 +28,7 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
     <p class="muted">Enter your registered email to get a reset link.</p>
     <?php if ($message): ?><p class="alert"><?= e($message) ?></p><?php endif; ?>
     <form method="post" class="form-grid">
+      <?= csrf_input() ?>
       <label>Email<input type="email" name="email" required></label>
       <button class="btn" type="submit">Generate Reset Link</button>
     </form>

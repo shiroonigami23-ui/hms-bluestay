@@ -147,3 +147,29 @@ CREATE TABLE visitor_logs (
   INDEX idx_visitor_checkin (check_in_at),
   INDEX idx_visitor_checkout (check_out_at)
 ) ENGINE=InnoDB;
+
+CREATE TABLE auth_attempts (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(120) NOT NULL,
+  ip_address VARCHAR(64) NOT NULL,
+  success TINYINT(1) NOT NULL DEFAULT 0,
+  attempted_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_auth_attempt_window (attempted_at),
+  INDEX idx_auth_attempt_email (email),
+  INDEX idx_auth_attempt_ip (ip_address)
+) ENGINE=InnoDB;
+
+CREATE TABLE audit_logs (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NULL,
+  role VARCHAR(40) NULL,
+  action_key VARCHAR(80) NOT NULL,
+  request_method VARCHAR(10) NOT NULL,
+  ip_address VARCHAR(64) NULL,
+  status_code INT NOT NULL,
+  detail VARCHAR(255) NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_audit_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+  INDEX idx_audit_action_time (action_key, created_at),
+  INDEX idx_audit_user_time (user_id, created_at)
+) ENGINE=InnoDB;

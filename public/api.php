@@ -6,9 +6,26 @@ $action = $_GET['action'] ?? '';
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $user = Auth::user();
 $publicActions = ['auth.ping'];
+$mutatingActions = [
+    'rooms.create','rooms.update','rooms.delete','rooms.updateStatus',
+    'bookings.create','bookings.updateStatus','bookings.checkin','bookings.checkout',
+    'tasks.create','tasks.updateStatus',
+    'services.create','services.updateStatus',
+    'inventory.create','inventory.updateStock',
+    'fnb.menu.create','fnb.menu.updateAvailability',
+    'security.visitors.create','security.visitors.checkout',
+    'invoices.generate','payments.create',
+];
 
 if (!in_array($action, $publicActions, true) && !Auth::check()) {
     ApiResponse::json(['ok' => false, 'message' => 'Unauthorized'], 401);
+}
+
+if (in_array($action, $mutatingActions, true)) {
+    if ($method !== 'POST') {
+        ApiResponse::json(['ok' => false, 'message' => 'Method not allowed'], 405);
+    }
+    validate_csrf_from_request();
 }
 
 function request_data(string $method): array
@@ -31,6 +48,23 @@ function must_have(array $data, array $fields): void
             ApiResponse::json(['ok' => false, 'message' => "Missing field: {$field}"], 422);
         }
     }
+}
+
+function audit_log(PDO $pdo, ?array $user, string $action, string $method, int $status, string $detail = ''): void
+{
+    $stmt = $pdo->prepare(
+        'INSERT INTO audit_logs(user_id, role, action_key, request_method, ip_address, status_code, detail)
+         VALUES(:user_id,:role,:action_key,:request_method,:ip_address,:status_code,:detail)'
+    );
+    $stmt->execute([
+        'user_id' => $user['id'] ?? null,
+        'role' => $user['role'] ?? null,
+        'action_key' => $action,
+        'request_method' => $method,
+        'ip_address' => $_SERVER['REMOTE_ADDR'] ?? null,
+        'status_code' => $status,
+        'detail' => mb_substr($detail, 0, 250),
+    ]);
 }
 
 try {
@@ -515,9 +549,11 @@ try {
             exit;
 
         default:
+            audit_log($pdo, $user, $action, $method, 404, 'Unknown action');
             ApiResponse::json(['ok' => false, 'message' => 'Unknown action'], 404);
     }
 } catch (Throwable $e) {
     error_log('[API ERROR] ' . $e->getMessage());
-    ApiResponse::json(['ok' => false, 'message' => 'API request failed safely', 'detail' => $e->getMessage()], 500);
+    audit_log($pdo, $user, $action, $method, 500, 'Exception');
+    ApiResponse::json(['ok' => false, 'message' => 'API request failed safely'], 500);
 }

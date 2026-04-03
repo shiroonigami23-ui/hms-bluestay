@@ -5,3 +5,9 @@
 /dist/
 *.log
 *.zip
+*.jks
+.env.localtest.bak
+mobile-app/.gradle/
+mobile-app/build/
+mobile-app/app/build/
+mobile-app/keystore/

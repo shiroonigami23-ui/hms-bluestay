@@ -1,7 +1,18 @@
 # BlueStay HMS
 
+[![PHP](https://img.shields.io/badge/PHP-8%2B-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+[![MySQL](https://img.shields.io/badge/MySQL-8%2F10.4-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Security Hardened](https://img.shields.io/badge/Security-Hardened-blue)](#security-hardening)
+[![Tests](https://img.shields.io/badge/Tests-57%20PASS-brightgreen)](tests/test_report.md)
+[![Live Site](https://img.shields.io/badge/Live-shirooni.free.nf-0A63FF)](https://shirooni.free.nf/)
+[![Android APK](https://img.shields.io/badge/Android-Release%20APK-3DDC84?logo=android&logoColor=white)](https://github.com/shiroonigami23-ui/hms-bluestay/releases/tag/v1.0.0)
+
 BlueStay HMS is a hotel management foundation built from your roadmap PDF.  
 It includes public pages, auth, RBAC dashboards, APIs, invoice download, and SQL schema.
+
+Live URL: **https://shirooni.free.nf/**
+Android Release: **https://github.com/shiroonigami23-ui/hms-bluestay/releases/tag/v1.0.0**
 
 ![Demo](docs/demo.gif)
 
@@ -89,3 +100,13 @@ Demo credentials (password for all): `Password@123`
 ## Wikimedia Images
 - Landing/About images are pulled from Wikimedia Commons and tracked in:
   - `public/assets/img/wiki_sources.txt`
+
+## Security Hardening
+- Session fixation mitigation (`session_regenerate_id` on login)
+- CSRF protection on forms and all mutating APIs
+- Rate limiting for login attempts (`auth_attempts` table)
+- Strict CSP and security headers (PHP + `.htaccess`)
+- Error/exception handling with safe client responses
+- Audit trail support (`audit_logs` table)
+- `.htaccess` hardening for production Apache hosts
+- Auto DB bootstrap migration on first startup (fresh DB safety)

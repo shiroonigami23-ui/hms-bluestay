@@ -47,4 +47,10 @@ INSERT INTO visitor_logs (visitor_name,phone,vehicle_no,purpose,check_in_at,logg
 ('Ravi Sharma','9876543210','UP32AB1234','Meeting Guest','2026-04-03 11:25:00',3),
 ('Courier Staff','9000012345',NULL,'Package Delivery','2026-04-03 15:10:00',3);
 
+INSERT INTO auth_attempts (email,ip_address,success,attempted_at) VALUES
+('guest@bluestay.local','127.0.0.1',1,NOW());
+
+INSERT INTO audit_logs (user_id,role,action_key,request_method,ip_address,status_code,detail) VALUES
+(2,'admin','seed.initialize','SYSTEM','127.0.0.1',200,'Initial seed data loaded');
+
 -- Demo login password for all users above: Password@123

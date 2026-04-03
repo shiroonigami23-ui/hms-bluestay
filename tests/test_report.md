@@ -1,12 +1,12 @@
 # HMS Test Report
 
-Generated: 2026-04-03 19:10:23
+Generated: 2026-04-03 19:18:23
 
 ## Unit Tests
 
 | Test | Status | Detail | Time (ms) |
 |---|---|---|---:|
-| unit.dashboard_title | PASS | OK | 50 |
+| unit.dashboard_title | PASS | OK | 52 |
 
 Summary: PASS=1, FAIL=0
 
@@ -14,12 +14,12 @@ Summary: PASS=1, FAIL=0
 
 | Test | Status | Detail | Time (ms) |
 |---|---|---|---:|
-| smoke/index.php | PASS | status=200 | 10 |
-| smoke/about.php | PASS | status=200 | 4 |
-| smoke/terms.php | PASS | status=200 | 27 |
-| smoke/privacy.php | PASS | status=200 | 15 |
-| smoke/help.php | PASS | status=200 | 4 |
-| smoke/contact.php | PASS | status=200 | 27 |
+| smoke/index.php | PASS | status=200 | 11 |
+| smoke/about.php | PASS | status=200 | 17 |
+| smoke/terms.php | PASS | status=200 | 4 |
+| smoke/privacy.php | PASS | status=200 | 3 |
+| smoke/help.php | PASS | status=200 | 3 |
+| smoke/contact.php | PASS | status=200 | 18 |
 | smoke/login.php | PASS | status=200 | 2 |
 | smoke/register.php | PASS | status=200 | 2 |
 | smoke/forgot-password.php | PASS | status=200 | 2 |
@@ -37,7 +37,7 @@ Summary: PASS=10, FAIL=0
 | api.rooms.update | PASS | status=200 | 0 |
 | api.rooms.updateStatus | PASS | status=200 | 0 |
 | api.rooms.list | PASS | status=200 | 0 |
-| api.bookings.create | PASS | status=201,code=BK2604031827 | 0 |
+| api.bookings.create | PASS | status=201,code=BK2604034798 | 0 |
 | api.bookings.get | PASS | status=200 | 0 |
 | api.bookings.checkin | PASS | status=200 | 0 |
 | api.bookings.checkout | PASS | status=200 | 0 |
@@ -78,7 +78,7 @@ Summary: PASS=38, FAIL=0
 |---|---|---|---:|
 | blackbox.unauthorized_rooms | PASS | status=401 | 0 |
 | blackbox.unknown_action | PASS | status=404 | 0 |
-| blackbox.missing_required_fields | PASS | status=422 | 0 |
+| blackbox.missing_required_fields | PASS | status=419 | 0 |
 
 Summary: PASS=3, FAIL=0
 
@@ -97,7 +97,7 @@ Summary: PASS=4, FAIL=0
 
 | Test | Status | Detail | Time (ms) |
 |---|---|---|---:|
-| scale.10k_virtual_users | PASS | total=10000, success=9998, fail=2, workers=200, elapsed_s=64.29, rps=155.55, p95_ms=1840.6 | 64288 |
+| scale.10k_virtual_users | PASS | total=10000, success=9999, fail=1, workers=200, elapsed_s=59.34, rps=168.52, p95_ms=1546.3 | 59339 |
 
 Summary: PASS=1, FAIL=0
 
