@@ -99,7 +99,15 @@ function bootstrap_auto_migrate(PDO $pdo, array $config): void
                 if ($stmt === '') {
                     continue;
                 }
-                $pdoConn->exec($stmt);
+                $upper = strtoupper($stmt);
+                if (str_starts_with($upper, 'CREATE DATABASE') || str_starts_with($upper, 'USE ')) {
+                    continue;
+                }
+                try {
+                    $pdoConn->exec($stmt);
+                } catch (Throwable $inner) {
+                    error_log('[BlueStay HMS] migration statement skipped: ' . $inner->getMessage());
+                }
             }
         };
 

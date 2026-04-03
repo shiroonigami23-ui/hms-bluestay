@@ -83,18 +83,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const dialog = createDialog();
   window.safeDialog = dialog;
-
-  window.alert = (msg) => dialog.alert(String(msg ?? ""));
-  window.confirm = (msg) => dialog.confirm(String(msg ?? ""));
-  window.prompt = (msg, def) => dialog.prompt(String(msg ?? ""), String(def ?? ""));
-
-  window.addEventListener("error", (event) => {
-    event.preventDefault();
-    dialog.alert("An unexpected error occurred. The app recovered safely.", "Recovered Error");
-  });
-
-  window.addEventListener("unhandledrejection", (event) => {
-    event.preventDefault();
-    dialog.alert("A network or script action failed safely. Please retry.", "Recovered Promise Error");
-  });
 });
