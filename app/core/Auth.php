@@ -40,6 +40,8 @@ final class Auth
 
     public static function register(PDO $pdo, array $data): bool
     {
+        // Public self-signup is customer-only. Staff users are admin-provisioned.
+        $role = 'customer';
         $stmt = $pdo->prepare(
             'INSERT INTO users(full_name,email,phone,role,password_hash) VALUES (:full_name,:email,:phone,:role,:password_hash)'
         );
@@ -47,7 +49,7 @@ final class Auth
             'full_name' => $data['full_name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'role' => $data['role'],
+            'role' => $role,
             'password_hash' => password_hash($data['password'], PASSWORD_DEFAULT),
         ]);
     }

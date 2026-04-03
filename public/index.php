@@ -22,12 +22,12 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
     </div>
     <div class="card panel">
       <img class="hero-image" src="assets/img/wiki_2.jpg" alt="Luxury hotel entrance">
-      <h3>Live Modules</h3>
+      <h3>Guest & Hotel Services</h3>
       <ul>
-        <li>Role-based dashboards for 8 user types</li>
-        <li>Invoice download and payment tracking</li>
-        <li>Room/service request management</li>
-        <li>API-ready architecture for app wrappers</li>
+        <li>Fast check-in and easy digital reservations</li>
+        <li>Real-time housekeeping and room status visibility</li>
+        <li>Invoice and payment history for every stay</li>
+        <li>Smooth concierge support across departments</li>
       </ul>
       <div class="pill-row">
         <span class="pill">Reception</span>
@@ -43,17 +43,17 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
     <h2 class="section-title">Stay Packages</h2>
     <div class="grid-3">
       <article class="feature-card">
-        <img src="assets/img/wiki_1.jpg" alt="Couple suite">
+        <img src="assets/img/suite_couple.jpg" alt="Couple suite">
         <h3>Couple Escape</h3>
         <p>Rose decor, candle-light dinner, spa voucher, breakfast in bed.</p>
       </article>
       <article class="feature-card">
-        <img src="assets/img/facility_pool.jpg" alt="Family package">
+        <img src="assets/img/suite_family.jpg" alt="Family package">
         <h3>Family Fun</h3>
         <p>Connected rooms, kids menu, pool access, city transfer support.</p>
       </article>
       <article class="feature-card">
-        <img src="assets/img/facility_cuisine.jpg" alt="Business package">
+        <img src="assets/img/facility_reception.jpg" alt="Business package">
         <h3>Business Elite</h3>
         <p>Meeting lounge access, premium Wi-Fi, executive breakfast, fast checkout.</p>
       </article>
@@ -72,12 +72,20 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
         <p>Swimming Pool</p>
       </article>
       <article class="gallery-item">
-        <img src="assets/img/facility_cuisine.jpg" alt="Restaurant cuisine">
-        <p>Cuisine & Dining</p>
+        <img src="assets/img/cuisine_indian.jpg" alt="Indian cuisine">
+        <p>Indian Cuisine</p>
       </article>
       <article class="gallery-item">
-        <img src="assets/img/wiki_2.jpg" alt="Evening hotel exterior">
-        <p>Premium Arrival</p>
+        <img src="assets/img/cuisine_continental.jpg" alt="Continental cuisine">
+        <p>Continental Cuisine</p>
+      </article>
+      <article class="gallery-item">
+        <img src="assets/img/cuisine_asian.jpg" alt="Asian cuisine">
+        <p>Asian Cuisine</p>
+      </article>
+      <article class="gallery-item">
+        <img src="assets/img/facility_bar.jpg" alt="Sky bar">
+        <p>Sky Bar</p>
       </article>
     </div>
   </section>

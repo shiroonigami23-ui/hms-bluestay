@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'full_name' => trim($_POST['full_name'] ?? ''),
         'email' => trim($_POST['email'] ?? ''),
         'phone' => trim($_POST['phone'] ?? ''),
-        'role' => trim($_POST['role'] ?? 'customer'),
+        'role' => 'customer',
         'password' => (string) ($_POST['password'] ?? ''),
     ];
 
@@ -34,25 +34,17 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
 ?>
 <main class="container narrow">
   <section class="card">
-    <h1>Create Account</h1>
+    <h1>Create Customer Account</h1>
     <?php if ($error): ?><p class="alert"><?= e($error) ?></p><?php endif; ?>
     <form method="post" class="form-grid">
       <?= csrf_input() ?>
       <label>Full Name<input type="text" name="full_name" required></label>
       <label>Email<input type="email" name="email" required></label>
       <label>Phone<input type="text" name="phone" required></label>
-      <label>Role
-        <select name="role">
-          <option value="customer">Customer</option>
-          <option value="reception">Reception</option>
-          <option value="housekeeping">Housekeeping</option>
-          <option value="kitchen">Kitchen</option>
-          <option value="security">Security</option>
-        </select>
-      </label>
       <label>Password<input type="password" name="password" required></label>
       <button class="btn" type="submit">Register</button>
     </form>
+    <p class="helper tiny">Staff accounts are created by hotel admin and shared via assigned official email.</p>
   </section>
 </main>
 <?php require dirname(__DIR__) . '/app/views/partials/footer.php'; ?>

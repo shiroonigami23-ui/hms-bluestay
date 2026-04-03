@@ -27,6 +27,7 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
       <label>Password<input type="password" name="password" required></label>
       <button class="btn" type="submit">Sign In</button>
     </form>
+    <p class="helper tiny">Staff login uses admin-assigned official email accounts. Public signup is for customers only.</p>
     <div class="form-links">
       <a href="forgot-password.php">Forgot password?</a>
       <a href="register.php">Create new account</a>

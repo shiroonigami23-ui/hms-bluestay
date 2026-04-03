@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const page = window.location.pathname.split("/").pop() || "index.php";
+  document.querySelectorAll(".main-nav a").forEach((link) => {
+    const href = link.getAttribute("href");
+    if (href === page || (page === "" && href === "index.php")) {
+      link.classList.add("active-link");
+    }
+  });
+
   const menuBtn = document.getElementById("menuBtn");
   const sidebar = document.getElementById("sidebar");
   if (menuBtn && sidebar) {

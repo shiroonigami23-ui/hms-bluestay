@@ -24,12 +24,12 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
           <p>Business-friendly space with work lounge and premium amenities.</p>
         </article>
         <article class="feature-card">
-          <img src="assets/img/wiki_2.jpg" alt="Family Suite">
+          <img src="assets/img/suite_family.jpg" alt="Family Suite">
           <h3>Family Suite</h3>
           <p>Comfort-first layout with extra space for long family stays.</p>
         </article>
         <article class="feature-card">
-          <img src="assets/img/facility_lounge.jpg" alt="Honeymoon Suite">
+          <img src="assets/img/suite_couple.jpg" alt="Honeymoon Suite">
           <h3>Honeymoon Suite</h3>
           <p>Elegant interiors, cozy lighting, and curated romantic setup.</p>
         </article>
@@ -39,19 +39,19 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
     <div class="tab-panel" id="fac-cuisine">
       <div class="grid-3">
         <article class="feature-card">
-          <img src="assets/img/facility_cuisine.jpg" alt="Indian Cuisine">
+          <img src="assets/img/cuisine_indian.jpg" alt="Indian Cuisine">
           <h3>Indian Cuisine</h3>
           <p>Regional classics, chef specials, and curated seasonal menu.</p>
         </article>
         <article class="feature-card">
-          <img src="assets/img/facility_cuisine.jpg" alt="Continental Cuisine">
+          <img src="assets/img/cuisine_continental.jpg" alt="Continental Cuisine">
           <h3>Continental</h3>
           <p>Global comfort dishes for breakfast, lunch, and evening dining.</p>
         </article>
         <article class="feature-card">
-          <img src="assets/img/facility_cuisine.jpg" alt="In-room dining">
-          <h3>In-Room Dining</h3>
-          <p>Fast, convenient room-service flow with live order status.</p>
+          <img src="assets/img/cuisine_asian.jpg" alt="Asian Cuisine">
+          <h3>Asian Cuisine</h3>
+          <p>Fresh Asian flavors with balanced menu options for every guest profile.</p>
         </article>
       </div>
     </div>
@@ -69,12 +69,12 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
           <p>Stylish lobby lounge for meetings, casual gatherings, and coffee.</p>
         </article>
         <article class="feature-card">
-          <img src="assets/img/facility_lounge.jpg" alt="Reception">
+          <img src="assets/img/facility_reception.jpg" alt="Reception">
           <h3>Reception & Concierge</h3>
           <p>Fast check-in desk, concierge help, and premium guest handling.</p>
         </article>
         <article class="feature-card">
-          <img src="assets/img/facility_cuisine.jpg" alt="Bar and beverages">
+          <img src="assets/img/facility_bar.jpg" alt="Bar and beverages">
           <h3>Sky Bar</h3>
           <p>Evening beverages, curated mocktails, and social seating with live service.</p>
         </article>
@@ -93,15 +93,18 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
 
     <div class="tab-panel" id="fac-packages">
       <div class="grid-3">
-        <article class="quick-card">
+        <article class="feature-card">
+          <img src="assets/img/suite_couple.jpg" alt="Couple package suite">
           <h4>Couple Package</h4>
           <p>Romantic suite decor, dinner experience, and late checkout.</p>
         </article>
-        <article class="quick-card">
+        <article class="feature-card">
+          <img src="assets/img/suite_family.jpg" alt="Family package suite">
           <h4>Family Package</h4>
           <p>Spacious suite options, kids meals, and leisure facility access.</p>
         </article>
-        <article class="quick-card">
+        <article class="feature-card">
+          <img src="assets/img/facility_lounge.jpg" alt="Celebration package lounge">
           <h4>Celebration Package</h4>
           <p>Occasion setup, lounge event support, and curated food plans.</p>
         </article>
