@@ -1,0 +1,2 @@
+Hotel room.jpg | https://commons.wikimedia.org/wiki/Special:FilePath/Hotel%20room.jpg | wiki_1.jpg
+Hotel Exterior.jpg | https://commons.wikimedia.org/wiki/Special:FilePath/Hotel%20Exterior.jpg | wiki_2.jpg

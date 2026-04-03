@@ -33,4 +33,18 @@ INSERT INTO invoices (invoice_no,booking_id,gstin,sub_total,tax_total,total_amou
 INSERT INTO payments (invoice_id,method,amount,transaction_ref,payment_status,paid_at) VALUES
 (1,'upi',3000,'UPIREF12345','success',NOW());
 
+INSERT INTO inventory_items (item_name,category,unit,stock_qty,reorder_level,cost_price) VALUES
+('Bath Towel','Housekeeping','pcs',120,40,280),
+('Drinking Water Bottle','Room Service','pcs',300,100,18),
+('Rice (Premium)','Kitchen','kg',85,30,65);
+
+INSERT INTO menu_items (item_name,category,price,is_available) VALUES
+('Veg Sandwich','Snacks',180,1),
+('Paneer Butter Masala','Main Course',320,1),
+('Fresh Lime Soda','Beverage',120,1);
+
+INSERT INTO visitor_logs (visitor_name,phone,vehicle_no,purpose,check_in_at,logged_by_user_id) VALUES
+('Ravi Sharma','9876543210','UP32AB1234','Meeting Guest','2026-04-03 11:25:00',3),
+('Courier Staff','9000012345',NULL,'Package Delivery','2026-04-03 15:10:00',3);
+
 -- Demo login password for all users above: Password@123

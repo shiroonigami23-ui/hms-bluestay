@@ -66,9 +66,9 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
 
     <div class="card">
       <div class="tab-row">
-        <button class="tab-btn active" data-tab="bookings" type="button">Bookings</button>
-        <button class="tab-btn" data-tab="tasks" type="button">Tasks</button>
-        <button class="tab-btn" data-tab="invoices" type="button">Invoices</button>
+        <button class="tab-btn active" data-tab="bookings" type="button"><img src="assets/img/icon-booking.svg" alt="">Bookings</button>
+        <button class="tab-btn" data-tab="tasks" type="button"><img src="assets/img/icon-task.svg" alt="">Tasks</button>
+        <button class="tab-btn" data-tab="invoices" type="button"><img src="assets/img/icon-invoice.svg" alt="">Invoices</button>
       </div>
     </div>
 

@@ -16,6 +16,7 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
       </div>
     </div>
     <div class="card panel">
+      <img class="hero-image" src="assets/img/wiki_2.jpg" alt="Hotel exterior from Wikimedia Commons">
       <h3>Live Modules</h3>
       <ul>
         <li>Role-based dashboards for 8 user types</li>
@@ -23,6 +24,7 @@ require dirname(__DIR__) . '/app/views/partials/header.php';
         <li>Room/service request management</li>
         <li>API-ready architecture for app wrappers</li>
       </ul>
+      <p class="muted tiny">Image source: Wikimedia Commons (see <a href="assets/img/wiki_sources.txt">wiki_sources.txt</a>)</p>
     </div>
   </section>
 </main>

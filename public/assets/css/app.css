@@ -26,11 +26,16 @@ a{color:var(--primary);text-decoration:none}
 .btn-sm{padding:7px 12px}
 .btn-ghost{background:#fff;color:var(--primary);border:1px solid var(--border)}
 .card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(10,99,255,.08)}
+.card{position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;inset:auto -40% -55% auto;width:280px;height:280px;background:radial-gradient(circle,#eaf2ff,transparent 60%);pointer-events:none}
 .panel ul{padding-left:18px}
 .container{max-width:1080px;margin:22px auto;padding:0 16px}
 .narrow{max-width:640px}
 .legal p{color:var(--muted)}
 .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.media-split{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin:14px 0 18px}
+.media-split img{width:100%;height:250px;object-fit:cover;border-radius:14px;border:1px solid var(--border)}
+.hero-image{width:100%;height:220px;object-fit:cover;border-radius:12px;border:1px solid var(--border);margin-bottom:10px}
 .faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-grid{display:grid;gap:12px}
 .form-grid label{display:grid;gap:6px;font-weight:600}
@@ -38,6 +43,7 @@ input,select,textarea{padding:10px;border:1px solid var(--border);border-radius:
 .alert{padding:10px;background:#ffe4e4;border:1px solid #ffb2b2;border-radius:10px;color:#9a1616}
 .muted{color:var(--muted)}
 .helper{margin-top:12px;color:var(--muted)}
+.tiny{font-size:.82rem}
 .form-links{display:flex;justify-content:space-between;gap:12px;margin-top:12px}
 .site-footer{margin-top:auto;padding:18px 20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;background:#fff}
 .footer-links{display:flex;gap:10px}
@@ -50,6 +56,8 @@ input,select,textarea{padding:10px;border:1px solid var(--border);border-radius:
 .stats-grid div{padding:14px;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px}
 .tab-row{display:flex;gap:10px;flex-wrap:wrap}
 .tab-btn{padding:9px 12px;border-radius:10px;border:1px solid var(--border);background:#f8fbff;color:var(--text);cursor:pointer}
+.tab-btn{display:flex;align-items:center;gap:7px}
+.tab-btn img{width:16px;height:16px}
 .tab-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
@@ -58,9 +66,15 @@ input,select,textarea{padding:10px;border:1px solid var(--border);border-radius:
 tbody tr:hover{background:#f7faff}
 table{width:100%;border-collapse:collapse;font-size:.92rem}
 th,td{padding:9px;border-bottom:1px solid #ecf1ff;text-align:left}
+.dialog-backdrop{position:fixed;inset:0;background:rgba(5,24,54,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:80}
+.dialog-box{width:min(460px,100%);background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:0 24px 80px rgba(3,35,88,.26);padding:18px}
+.dialog-box h3{margin:0 0 8px}
+.dialog-input{margin-top:8px;width:100%}
+.dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
 @media (max-width:980px){
   .hero{grid-template-columns:1fr}
   .grid-3{grid-template-columns:1fr}
+  .media-split{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .info-cards{grid-template-columns:1fr}
   .dashboard-layout{grid-template-columns:1fr}

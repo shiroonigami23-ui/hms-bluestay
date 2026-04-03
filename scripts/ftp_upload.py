@@ -1,10 +1,17 @@
 from pathlib import Path
 from ftplib import FTP
+import os
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-HOST = "ftpupload.net"
-USER = "if0_41453030"
-PASS = "u8W8gwlvMynyC"
+HOST = os.getenv("FTP_HOST", "ftpupload.net")
+USER = os.getenv("FTP_USER", "")
+PASS = os.getenv("FTP_PASS", "")
+
+if len(sys.argv) >= 4:
+    HOST = sys.argv[1]
+    USER = sys.argv[2]
+    PASS = sys.argv[3]
 
 SKIP_PARTS = {".git", "node_modules", "vendor", "__pycache__"}
 
@@ -21,6 +28,8 @@ def ensure_dir(ftp: FTP, rel_path: str) -> None:
 
 
 def main() -> None:
+    if not USER or not PASS:
+        raise SystemExit("Provide credentials via env FTP_HOST/FTP_USER/FTP_PASS or args: host user pass")
     ftp = FTP(HOST, timeout=60)
     ftp.login(USER, PASS)
     print("logged in")

@@ -109,3 +109,41 @@ CREATE TABLE password_resets (
   INDEX idx_password_resets_user (user_id),
   INDEX idx_password_resets_expires (expires_at)
 ) ENGINE=InnoDB;
+
+CREATE TABLE inventory_items (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  item_name VARCHAR(120) NOT NULL,
+  category VARCHAR(60) NOT NULL,
+  unit VARCHAR(20) NOT NULL DEFAULT 'pcs',
+  stock_qty DECIMAL(12,2) NOT NULL DEFAULT 0,
+  reorder_level DECIMAL(12,2) NOT NULL DEFAULT 0,
+  cost_price DECIMAL(12,2) NOT NULL DEFAULT 0,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_inventory_category (category),
+  INDEX idx_inventory_stock (stock_qty)
+) ENGINE=InnoDB;
+
+CREATE TABLE menu_items (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  item_name VARCHAR(120) NOT NULL,
+  category VARCHAR(60) NOT NULL,
+  price DECIMAL(12,2) NOT NULL DEFAULT 0,
+  is_available TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_menu_available (is_available),
+  INDEX idx_menu_category (category)
+) ENGINE=InnoDB;
+
+CREATE TABLE visitor_logs (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  visitor_name VARCHAR(120) NOT NULL,
+  phone VARCHAR(30) NULL,
+  vehicle_no VARCHAR(40) NULL,
+  purpose VARCHAR(120) NOT NULL,
+  check_in_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  check_out_at DATETIME NULL,
+  logged_by_user_id INT UNSIGNED NULL,
+  CONSTRAINT fk_visitor_user FOREIGN KEY (logged_by_user_id) REFERENCES users(id) ON DELETE SET NULL,
+  INDEX idx_visitor_checkin (check_in_at),
+  INDEX idx_visitor_checkout (check_out_at)
+) ENGINE=InnoDB;

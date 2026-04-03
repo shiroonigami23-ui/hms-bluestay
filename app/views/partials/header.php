@@ -9,6 +9,8 @@ $isAuth = Auth::check();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= e($title) ?></title>
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/img/app-icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="assets/img/app-icon-192.png">
   <link rel="stylesheet" href="assets/css/app.css">
 </head>
 <body>
